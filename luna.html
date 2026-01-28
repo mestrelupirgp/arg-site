@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>luna</title>
+
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: opacity 2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <img id="imagem" src="https://pbs.twimg.com/media/G_igER9XcAAaAfy?format=jpg&name=large">
+
+    <!-- 🎵 ÁUDIO -->
+    <audio id="audio" autoplay loop>
+        <source src="Woman on the Other Side.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const imagens = [
+            "https://pbs.twimg.com/media/G_igER9XcAAaAfy?format=jpg&name=large",
+            "https://pbs.twimg.com/media/G_ier09XMAIBMUR?format=jpg&name=large",
+            "https://pbs.twimg.com/media/G_iZ9IgWYAA17WJ?format=jpg&name=large"
+        ];
+
+        let index = 0;
+        const img = document.getElementById("imagem");
+
+        setInterval(() => {
+            img.style.opacity = 0;
+
+            setTimeout(() => {
+                index = (index + 1) % imagens.length;
+                img.src = imagens[index];
+                img.style.opacity = 1;
+            }, 2000);
+
+        }, 40000); // 40 segundos
+    </script>
+
+</body>
+</html>
