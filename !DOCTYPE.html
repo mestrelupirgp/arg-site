@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>...</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+
+            /* 🔑 FUNDO COM IMAGEM (ARG) */
+            background-image: url("https://i.imgur.com/EYOXHV4.gif");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .menu {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 280px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #111;
+            color: white;
+            border: 1px solid #444;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background-color: #ffffff; /* BOTÃO BRANCO */
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #mensagem {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu">
+        <h2>?</h2>
+        <input type="text" id="chave" placeholder="...">
+        <button onclick="verificar()">Enviar</button>
+        <p id="mensagem">numpego</p>
+    </div>
+
+    <script>
+        function verificar() {
+            var valor = document.getElementById("chave").value.toLowerCase();
+
+            if (valor === "conhecimento") {
+                window.open("https://imgur.com/a/En9xfea", "_blank");
+            }
+            else if (valor === "intenção") {
+                window.open("https://www.youtube.com/watch?v=wnByyzY_MpI&list=PLJkOSRPJdKc-EZfw7HXODAgI24D8bSuVi&index=23", "_blank");
+            }
+            else if (valor === "marionete") {
+                window.open("https://x.com/acervosebastian", "_blank");
+            }
+            else {
+                document.getElementById("mensagem").innerText = "...";
+            }
+        }
+    </script>
+
+</body>
+</html>
