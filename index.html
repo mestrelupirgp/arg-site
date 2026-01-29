@@ -8,7 +8,6 @@
         body {
             font-family: Arial, sans-serif;
 
-            /* 🔑 FUNDO COM IMAGEM (ARG) */
             background-image: url("https://i.imgur.com/EYOXHV4.gif");
             background-size: cover;
             background-position: center;
@@ -46,7 +45,7 @@
             margin-top: 15px;
             padding: 10px;
             width: 100%;
-            background-color: #ffffff; /* BOTÃO BRANCO */
+            background-color: #ffffff;
             color: #000000;
             border: none;
             border-radius: 5px;
@@ -67,36 +66,43 @@
 </head>
 <body>
 
-    <div class="menu">
-        <h2>?</h2>
-        <input type="text" id="chave" placeholder="...">
-        <button onclick="verificar()">Enviar</button>
-        <p id="mensagem">numpego</p>
-    </div>
+<div class="menu">
+    <h2>?</h2>
+    <input type="text" id="chave" placeholder="...">
+    <button onclick="verificar()">Enviar</button>
+    <p id="mensagem">numpego</p>
+</div>
 
-    <script>
-    function verificar() {
-        var valor = document.getElementById("chave").value.toLowerCase();
+<script>
+function verificar() {
 
-        if (valor === "conhecimento") {
-            window.open("https://imgur.com/a/En9xfea", "_blank");
-        }
-        else if (valor === "intenção") {
-            window.open("https://www.youtube.com/watch?v=wnByyzY_MpI&list=PLJkOSRPJdKc-EZfw7HXODAgI24D8bSuVi&index=23", "_blank");
-        }
-        else if (valor === "marionete") {
-            window.open("https://x.com/acervosebastian", "_blank");
-        }
-        else if (valor === "luna") {
-            window.open("luna.html", "_blank");
-        }
-        else {
-            document.getElementById("mensagem").innerText = "...";
-        }
+    var valor = document.getElementById("chave").value.toLowerCase();
+
+    if (valor === "conhecimento") {
+        window.open("https://imgur.com/a/En9xfea", "_blank");
     }
-</script>
 
+    else if (valor === "intenção") {
+        window.open("https://www.youtube.com/watch?v=wnByyzY_MpI&list=PLJkOSRPJdKc-EZfw7HXODAgI24D8bSuVi&index=23", "_blank");
+    }
+
+    else if (valor === "marionete") {
+        window.open("https://x.com/acervosebastian", "_blank");
+    }
+
+    else if (valor === "luna") {
+        window.open("luna.html", "_blank");
+    }
+
+    else if (valor === "godolkin") {
+        window.open("godolkin.html", "_blank");
+    }
+
+    else {
+        document.getElementById("mensagem").innerText = "...";
+    }
+}
+</script>
 
 </body>
 </html>
-
