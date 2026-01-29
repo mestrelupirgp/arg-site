@@ -78,7 +78,13 @@ function verificar() {
 
     var valor = document.getElementById("chave").value.toLowerCase();
 
-    if (valor === "conhecimento") {
+    if (
+        valor === "conhecimento" || 
+        valor === "morte" || 
+        valor === "energia" ||
+        valor === "medo" ||
+        valor === "sangue"
+    ) {
         window.open("https://imgur.com/a/En9xfea", "_blank");
     }
 
@@ -106,3 +112,4 @@ function verificar() {
 
 </body>
 </html>
+
