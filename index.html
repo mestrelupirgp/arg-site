@@ -75,33 +75,38 @@
 </div>
 
 <script>
+function b64(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+}
+
 function verificar() {
 
     var valor = document.getElementById("chave").value.toLowerCase();
+    var valorB64 = b64(valor);
 
     if (
-        valor === "conhecimento" || 
-        valor === "morte" || 
-        valor === "energia" ||
-        valor === "medo" ||
-        valor === "sangue"
+        valorB64 === "Y29uaGVjaW1lbnRv" ||  
+        valorB64 === "bW9ydGU=" ||          
+        valorB64 === "ZW5lcmdpYQ==" ||      
+        valorB64 === "bWVkbw==" ||          
+        valorB64 === "c2FuZ3Vl"             
     ) {
         window.open("https://imgur.com/a/En9xfea", "_blank");
     }
 
-    else if (valor === "intenção") {
+    else if (valorB64 === "aW50ZW7Dp8Ojbw==") { 
         window.open("https://www.youtube.com/watch?v=wnByyzY_MpI&list=PLJkOSRPJdKc-EZfw7HXODAgI24D8bSuVi&index=23", "_blank");
     }
 
-    else if (valor === "marionete") {
+    else if (valorB64 === "bWFyaW9uZXRl") { 
         window.open("https://x.com/acervosebastian", "_blank");
     }
 
-    else if (valor === "luna") {
+    else if (valorB64 === "bHVuYQ==") { 
         window.open("luna.html", "_blank");
     }
 
-    else if (valor === "godolkin") {
+    else if (valorB64 === "Z29kb2xraW4=") { 
         window.open("godolkin.html", "_blank");
     }
 
@@ -113,4 +118,5 @@ function verificar() {
 
 </body>
 </html>
+
 
