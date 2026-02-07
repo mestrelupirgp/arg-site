@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Sequência</title>
+
+<style>
+    body {
+        background: radial-gradient(circle, #111, #000);
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    #game {
+        position: relative;
+        width: 360px;
+        height: 360px;
+        margin-top: 20px;
+    }
+
+    .char {
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 34px;
+        cursor: pointer;
+        user-select: none;
+        transition:
+            transform 0.25s ease,
+            filter 0.25s ease,
+            box-shadow 0.25s ease,
+            opacity 0.25s ease;
+        box-shadow: 0 0 15px rgba(0,0,0,0.8);
+    }
+
+    .char.active {
+        transform: scale(1.25);
+        filter: brightness(2.2);
+        box-shadow:
+            0 0 15px currentColor,
+            0 0 40px currentColor,
+            0 0 70px currentColor;
+        outline: 3px solid white;
+        outline-offset: 4px;
+        z-index: 10;
+    }
+
+    .char.dim {
+        opacity: 0.25;
+        filter: grayscale(60%);
+    }
+
+    /* posições tipo estrela */
+    #c0 { top: 10px; left: 135px; }
+    #c1 { top: 105px; left: 255px; }
+    #c2 { top: 240px; left: 195px; }
+    #c3 { top: 240px; left: 75px; }
+    #c4 { top: 105px; left: 15px; }
+
+    /* cores */
+    #c0 { background: #6a0dad; color: white; }
+    #c1 { background: #444; color: #eee; }
+    #c2 { background: #e6c84f; color: #000; }
+    #c3 { background: #fff; color: #000; }
+    #c4 { background: #c62828; color: white; }
+
+    button {
+        margin-top: 20px;
+        padding: 12px 32px;
+        font-size: 18px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    #prosseguir {
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<button id="start">Iniciar</button>
+
+<div id="game">
+    <div class="char" id="c0">⩙</div>
+    <div class="char" id="c1">ᘜ</div>
+    <div class="char" id="c2">ზ</div>
+    <div class="char" id="c3">ॽ</div>
+    <div class="char" id="c4">ǂ</div>
+</div>
+
+<button id="prosseguir" onclick="window.location.href='https://x.com/i/status/2019780610559025469'">
+    Prosseguir
+</button>
+
+<script>
+    const chars = document.querySelectorAll('.char');
+    const startBtn = document.getElementById('start');
+    const prosseguir = document.getElementById('prosseguir');
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const notas = [220, 247, 294, 330, 392];
+    const volume = 0.07;
+
+    let sequence = [];
+    let userSequence = [];
+    let fase = 1;
+    let acceptingInput = false;
+    let started = false;
+
+    function playSound(index) {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = "triangle";
+        osc.frequency.value = notas[index];
+        gain.gain.value = volume;
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.45);
+    }
+
+    function setDim(activeIndex) {
+        chars.forEach((c, i) => {
+            c.classList.toggle('dim', i !== activeIndex);
+        });
+    }
+
+    function clearDim() {
+        chars.forEach(c => c.classList.remove('dim'));
+    }
+
+    function flash(index) {
+        return new Promise(resolve => {
+            const el = chars[index];
+            setDim(index);
+            playSound(index);
+            el.classList.add('active');
+
+            setTimeout(() => {
+                el.classList.remove('active');
+                clearDim();
+                setTimeout(resolve, 300);
+            }, 650);
+        });
+    }
+
+    async function showSequence() {
+        acceptingInput = false;
+        for (let i of sequence) {
+            await flash(i);
+        }
+        userSequence = [];
+        acceptingInput = true;
+    }
+
+    function nextFase() {
+        sequence.push(Math.floor(Math.random() * chars.length));
+        setTimeout(showSequence, 900);
+    }
+
+    chars.forEach((char, index) => {
+        char.addEventListener('click', () => {
+            if (!acceptingInput || !started) return;
+
+            playSound(index);
+            char.classList.add('active');
+            setTimeout(() => char.classList.remove('active'), 250);
+
+            userSequence.push(index);
+
+            if (userSequence[userSequence.length - 1] !== sequence[userSequence.length - 1]) {
+                userSequence = [];
+                showSequence();
+                return;
+            }
+
+            if (userSequence.length === sequence.length) {
+                fase++;
+                if (fase > 5) {
+                    acceptingInput = false;
+                    prosseguir.style.display = "inline-block";
+                } else {
+                    nextFase();
+                }
+            }
+        });
+    });
+
+    startBtn.addEventListener('click', () => {
+        if (started) return;
+        started = true;
+        startBtn.style.display = "none";
+
+        // sequência inicial aleatória (2 símbolos)
+        sequence = [
+            Math.floor(Math.random() * chars.length),
+            Math.floor(Math.random() * chars.length)
+        ];
+
+        showSequence();
+    });
+</script>
+
+</body>
+</html>
