@@ -7,12 +7,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-
             background-image: url("https://i.imgur.com/EYOXHV4.gif");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -110,6 +108,11 @@ function verificar() {
         window.open("godolkin.html", "_blank");
     }
 
+    /* memento -> memoryE */
+    else if (valorB64 === "bWVtZW50bw==") { 
+        window.open("memoryE.html", "_blank");
+    }
+
     else {
         document.getElementById("mensagem").innerText = "Numpe Gô";
     }
@@ -118,5 +121,3 @@ function verificar() {
 
 </body>
 </html>
-
-
