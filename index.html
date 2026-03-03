@@ -13,7 +13,6 @@ html, body {
     height: 100vh;
 }
 
-/* ===== MATRIX CANVAS ===== */
 canvas {
     position: fixed;
     top: 0;
@@ -21,7 +20,6 @@ canvas {
     z-index: 0;
 }
 
-/* ===== TEXTO DIGITANDO ===== */
 #typing {
     position: absolute;
     top: 30%;
@@ -35,7 +33,6 @@ canvas {
     box-sizing: border-box;
 }
 
-/* ===== MENU ===== */
 body {
     font-family: Arial, sans-serif;
     color: #ffffff;
@@ -89,7 +86,6 @@ button:hover {
     color: #aaaaaa;
 }
 
-/* ===== ERRO VISUAL ===== */
 .erro {
     color: #ff5fa2;
     transition: color 0.3s ease;
@@ -118,7 +114,7 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const chars = "アァカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const chars = "アァカサタナハマヤラワ0123456789MORGANAABCDEFGELENAHIJKLMNOPALEXQRSTUVWXYZ";
 const fontSize = 16;
 const columns = canvas.width / fontSize;
 const drops = [];
@@ -205,7 +201,7 @@ function verificar() {
         window.open("https://imgur.com/a/En9xfea", "_blank");
     }
 
-    else if (valorB64 === "aW50ZW7Dp8Ojbw==") { 
+    else if (valorB64 === "Y3Jpc3RhbA==") { 
         window.open("https://www.youtube.com/watch?v=wnByyzY_MpI&list=PLJkOSRPJdKc-EZfw7HXODAgI24D8bSuVi&index=23", "_blank");
     }
 
@@ -213,15 +209,15 @@ function verificar() {
         window.open("https://x.com/acervosebastian", "_blank");
     }
 
-    else if (valorB64 === "bHVuYQ==") { 
+    else if (valorB64 === "dGVtcHVz") { 
         window.open("luna.html", "_blank");
     }
 
-    else if (valorB64 === "Z29kb2xraW4=") { 
+    else if (valorB64 === "cnViM3JuNDUw") { 
         window.open("godolkin.html", "_blank");
     }
 
-    else if (valorB64 === "bWVtZW50bw==") { 
+    else if (valorB64 === "bHV6ZXM=") { 
         window.open("memoryE.html", "_blank");
     }
 
@@ -243,7 +239,6 @@ function verificar() {
     }
 }
 
-// Resize
 window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
