@@ -19,7 +19,7 @@ body {
     transition: background-image 0.5s ease;
 }
 
-/* Botão ligar */
+/* Botão ligar inicial */
 #ligarBtn {
     padding: 15px 40px;
     font-size: 20px;
@@ -77,9 +77,9 @@ body {
 .tecla:hover {
     background-color: #555;
 }
-
 </style>
 </head>
+
 <body>
 
 <button id="ligarBtn" onclick="ligar()">ligar</button>
@@ -103,9 +103,14 @@ body {
     </div>
 </div>
 
+<!-- Áudio -->
+<audio id="audioChamada" src="audiotele_01.mp3"></audio>
+
 <script>
 
 let numeroDigitado = "";
+const visor = document.getElementById("visor");
+const audio = document.getElementById("audioChamada");
 
 function ligar() {
     document.body.style.backgroundImage = "url('https://imgur.com/ipaXg2P.jpeg')";
@@ -115,35 +120,57 @@ function ligar() {
 
 function digitar(num) {
     numeroDigitado += num;
-    document.getElementById("visor").innerText = numeroDigitado;
+    visor.innerText = numeroDigitado;
 }
 
 function limpar() {
     numeroDigitado = "";
-    document.getElementById("visor").innerText = "";
+    visor.innerText = "";
 }
 
 function verificarNumero() {
 
     if (numeroDigitado === "3401") {
-        document.getElementById("visor").innerText = "Chamando...";
-        
+        visor.innerText = "Chamando...";
+        audio.currentTime = 0;
+        audio.play();
+
         setTimeout(() => {
-            document.getElementById("visor").innerText = "Conectado.";
-        }, 2000);
+            visor.innerText = "Conectado.";
+        }, 3000);
     }
 
     else {
-        document.getElementById("visor").innerText = "Número inválido";
+        visor.innerText = "Número inválido";
         setTimeout(() => {
             limpar();
         }, 1500);
     }
-
 }
+
+/* ===== SUPORTE AO TECLADO FÍSICO ===== */
+
+document.addEventListener("keydown", function(event) {
+
+    // números 0-9
+    if (event.key >= "0" && event.key <= "9") {
+        digitar(event.key);
+    }
+
+    // Enter = ligar
+    if (event.key === "Enter") {
+        verificarNumero();
+    }
+
+    // Backspace = apagar último dígito
+    if (event.key === "Backspace") {
+        numeroDigitado = numeroDigitado.slice(0, -1);
+        visor.innerText = numeroDigitado;
+    }
+
+});
 
 </script>
 
 </body>
-
 </html>
