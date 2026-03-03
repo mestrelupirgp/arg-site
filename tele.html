@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>alo?</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("https://i.imgur.com/MyCYnBh.jpeg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-image 0.5s ease;
+}
+
+/* Botão ligar */
+#ligarBtn {
+    padding: 15px 40px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: black;
+    color: white;
+}
+
+/* Telefone */
+#telefone {
+    display: none;
+    width: 320px;
+    background-color: #111;
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0 0 30px black;
+    text-align: center;
+}
+
+/* Visor */
+#visor {
+    background-color: #222;
+    color: #00ff66;
+    height: 50px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-right: 15px;
+    font-size: 22px;
+    letter-spacing: 3px;
+}
+
+/* Teclado */
+.teclado {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.tecla {
+    padding: 20px;
+    font-size: 20px;
+    border: none;
+    border-radius: 50%;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.tecla:hover {
+    background-color: #555;
+}
+
+</style>
+</head>
+<body>
+
+<button id="ligarBtn" onclick="ligar()">ligar</button>
+
+<div id="telefone">
+    <div id="visor"></div>
+
+    <div class="teclado">
+        <button class="tecla" onclick="digitar('1')">1</button>
+        <button class="tecla" onclick="digitar('2')">2</button>
+        <button class="tecla" onclick="digitar('3')">3</button>
+        <button class="tecla" onclick="digitar('4')">4</button>
+        <button class="tecla" onclick="digitar('5')">5</button>
+        <button class="tecla" onclick="digitar('6')">6</button>
+        <button class="tecla" onclick="digitar('7')">7</button>
+        <button class="tecla" onclick="digitar('8')">8</button>
+        <button class="tecla" onclick="digitar('9')">9</button>
+        <button class="tecla" onclick="limpar()">C</button>
+        <button class="tecla" onclick="digitar('0')">0</button>
+        <button class="tecla" onclick="verificarNumero()">☎</button>
+    </div>
+</div>
+
+<script>
+
+let numeroDigitado = "";
+
+function ligar() {
+    document.body.style.backgroundImage = "url('https://imgur.com/D5BrVKJ.jpeg')";
+    document.getElementById("ligarBtn").style.display = "none";
+    document.getElementById("telefone").style.display = "block";
+}
+
+function digitar(num) {
+    numeroDigitado += num;
+    document.getElementById("visor").innerText = numeroDigitado;
+}
+
+function limpar() {
+    numeroDigitado = "";
+    document.getElementById("visor").innerText = "";
+}
+
+function verificarNumero() {
+
+    if (numeroDigitado === "3401") {
+        document.getElementById("visor").innerText = "Chamando...";
+        
+        setTimeout(() => {
+            document.getElementById("visor").innerText = "Conectado.";
+        }, 2000);
+    }
+
+    else {
+        document.getElementById("visor").innerText = "Número inválido";
+        setTimeout(() => {
+            limpar();
+        }, 1500);
+    }
+
+}
+
+</script>
+
+</body>
+</html>
